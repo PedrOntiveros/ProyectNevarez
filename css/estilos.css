@@ -71,7 +71,6 @@ body{
 	margin-right: 30px;
 }
 .botonesCubiculo{
-
 	width: 100%;
 }
 .num{
@@ -81,5 +80,7 @@ body{
 	font-size: 1.2em;
 	font-style: bold;
 }
- 
- 
+
+#tabla{
+	margin: 0 auto;
+}

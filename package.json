@@ -1,0 +1,35 @@
+{
+  "name": "apartado-cubiculos",
+  "version": "1.0.0",
+  "description": "Proyecto de la materia Programación Web, sistema de apartado de cubiculos con HTML, JavaScript, CSS, PHP y Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedrOntiveros/ProyectNevarez.git"
+  },
+  "keywords": [
+    "Apartado",
+    "Cubiculo",
+    "Sistema"
+  ],
+  "author": "Dautt Ramirez, Meza Valdez, Ontiveros Moreno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PedrOntiveros/ProyectNevarez/issues"
+  },
+  "homepage": "https://github.com/PedrOntiveros/ProyectNevarez#readme",
+  "devDependencies": {
+    "electron": "^1.6.10",
+    "electron-require": "^0.3.0",
+    "jquery": "^3.2.1"
+  },
+  "dependencies": {
+    "electron": "^1.6.10",
+    "electron-require": "^0.3.0",
+    "jquery": "^3.2.1"
+  }
+}
