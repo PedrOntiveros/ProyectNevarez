@@ -1,0 +1,85 @@
+body{
+	font-size: 16px;
+	margin: 0 auto;
+	max-width: 1024px;
+}
+#titulo{
+ 	width: 99.6%;
+ 	text-align: center;
+ 	font-style: bold;
+ }
+ #datos {
+ 	width: 95%;
+ 	display: inline-block;
+ }
+ #general{
+ 	width: 99.6%;
+ 	text-align: center;
+ 	font-size: 1.5em;
+ 	font-style: bold;
+ }
+ #txtNumeroControl{
+ 	margin-right:  -4px;
+ 	display: inline-block;
+ 	width: 15.1%
+ }
+  #txtNombre{
+  	margin-right:  -5px;
+ 	display: inline-block;
+ 	width: 78.3%
+ }
+  #btnReporte{
+  	display: inline-block;
+ 	width: 6.2%
+ }
+  #txtCarrera{
+ 	width: 99.6%
+ }
+ #txtFechaInicio{
+ 	margin-right:  -5px;
+ 	display: inline-block;
+ 	width: 24.9%
+ }
+ #txtFechaFin{
+ 	margin-right:  -4px;
+ 	display: inline-block;
+ 	width: 24.9%
+ }
+ 
+ #txtHora{
+ 	margin-right:  -4px;
+ 	display: inline-block;
+ 	width: 24.9%
+ }
+ 
+ #txtCubiculo{
+ 	display: inline-block;
+ 	width: 24.9%
+ }
+
+ #botonesEstado{
+ 	width: 40%;
+ 	margin: 0 auto;
+ }
+#btnGuardar{
+	margin-right: 30px;
+}
+ #btnLiberar{
+	margin-right: 30px;
+}
+#btnEliminar{
+	margin-right: 30px;
+}
+.botonesCubiculo{
+
+	width: 100%;
+}
+.num{
+	text-align: center;
+}
+.tamaño{
+	font-size: 1.2em;
+	font-style: bold;
+}
+ 
+ 
