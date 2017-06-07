@@ -1,24 +1,26 @@
-const rq = require ('electron-require');
+const rq   = require ('electron-require');
 const main = rq.remote('./main.js');
-const $ = require("jquery");
+const $    = require("jquery");
 
 var iniciaApp = function(){
 	//función para poner en el título la fecha del día de hoy.
 	var fechaTit = fechaTitulo();
 	var fechaAct = fechaActual();
 	$("#titulo").html(fechaTit);
-
 	var obtenInfoCubiculo = function(){
 		//Esto solo debe funcionar para los botones de cubiculos
 		var cubiculo = ($(this).attr("id")).substr(-2);
 		var hora 	 = ($(this).attr("id")).substr(3,2)+":00";
 		$("#general").html("Cubiculo "+cubiculo+" hora "+hora);
 		if(hora == 'Re:00'){
+			$("#general").html("");
 			//Aquí llamamos a la función para generar reporte
 		}else{
 			//Aquí hacemos la consulta para verificar que el cubiculo en la hora 
 			//seleccionada no esté ocupado.
-			//Se hace consulta del cubiculo y se llenan los campos con la información requerida
+			//Se hace consulta del cubiculo y se llenan los campos con la 
+			//información requerida
+			limpiaCampos();
 			var parametros ="opcion=consulta"+
 						    "&cubiculo="+cubiculo+
 						    "&hora="+hora+
@@ -28,16 +30,27 @@ var iniciaApp = function(){
 				method:"POST",
 				url:"php/datos.php",
 				data:parametros,
-				dataType:"json"
-			});
+				dataType: "json"
+				});
 			consultaCubiculo.done(function(data){
 				if(data.respuesta==true){
-					$("#txtNumeroControl").val(data.nControl);
+					$("#txtNumeroControl").val(data.ncontrol);
 					$("#txtNombre").val(data.nombre);
 					$("#txtCarrera").val(data.carrera);
 					$("#txtFecha").val(data.fechaAct);
 					$("#txtHora").val(data.hora);
 					$("#txtCubiculo").val(data.cubiculo);
+					if(data.estado == "liberado"){
+						var horaBoton 	 = (hora.substr(0,2));
+						var boton="#btn"+horaBoton+cubiculo;
+						$(boton).css("background","#52CFF9");
+						$(boton).css("color","#FFFFFF");
+					}else if(data.estado == "apartado"){
+						var horaBoton 	 = (hora.substr(0,2));
+						var boton="#btn"+horaBoton+cubiculo;
+						$(boton).css("background","#FF0000");
+						$(boton).css("color","#FFFFFF");
+					}
 				}else{
 					$("#txtFecha").val(fechaAct);
 					$("#txtHora").val(hora);
@@ -46,9 +59,6 @@ var iniciaApp = function(){
 			});
 			consultaCubiculo.fail(function(jqError,textStatus){
 			});
-			$("#txtFecha").val(fechaAct);
-			$("#txtHora").val(hora);
-			$("#txtCubiculo").val(cubiculo);
 		}
 	}
 
@@ -67,9 +77,8 @@ var iniciaApp = function(){
 						   "&fecha="+fecha+
 						   "&hora="+hora+
 						   "&cubiculo="+cubiculo+
+						   "&estado=liberado"+
 						   "&id="+Math.random();
-			alert("Liberar datos: "+parametros);
-
 			var eliminaCubiculo=$.ajax({
 				method:"POST",
 				url:"php/datos.php",
@@ -84,7 +93,7 @@ var iniciaApp = function(){
 					$(boton).css("background","#52CFF9");
 					$(boton).css("color","#FFFFFF");			
 				}else{
-					alert("Cubiculo no existente o no se pudo liberar");
+					alert("Cubiculo no ocupado.");
 				}
 			});
 			eliminaCubiculo.fail(function(jqError,textStatus){
@@ -110,15 +119,11 @@ var iniciaApp = function(){
 			return;
 		}else{
 			var parametros="opcion=eliminar"+
-						   "&numeroControl="+numeroControl+
-						   "&nombre="+nombre+
-						   "&carrera="+carrera+
+						   "&ncontrol="+numeroControl+
 						   "&fecha="+fecha+
 						   "&hora="+hora+
 						   "&cubiculo="+cubiculo+
 						   "&id="+Math.random();
-			alert("Eliminar datos: "+parametros);
-				   
 			var eliminaCubiculo=$.ajax({
 				method:"POST",
 				url:"php/datos.php",
@@ -164,8 +169,8 @@ var iniciaApp = function(){
 							"&fecha="+fechaApartado+
 						   	"&hora="+hora+
 						   	"&cubiculo="+cubiculo+
+						   	"&estado=apartado"+
 						   	"&id="+Math.random();
-			alert("Guardar datos: "+parametros);
 			var altaCubiculo=$.ajax({
 				method:"POST",
 				url:"php/datos.php",
@@ -174,13 +179,13 @@ var iniciaApp = function(){
 			});
 			altaCubiculo.done(function(data){
 				if(data.respuesta==true){
-					alert("cubiculo guardado correctamente");
+					alert("Cubiculo guardado correctamente.");
 					var horaBoton 	 = (hora.substr(0,2));
 					var boton="#btn"+horaBoton+cubiculo;
 					$(boton).css("background","#FF0000");
 					$(boton).css("color","#FFFFFF");			
 				}else{
-					alert("Cubiculo ocupado o no se guardo correctamente");
+					alert("Cubiculo ocupado o no se guardo correctamente.");
 				}
 			});
 			altaCubiculo.fail(function(jqError,textStatus){
@@ -218,8 +223,34 @@ var fechaTitulo = function () {
 
 var fechaActual = function () {
 	var d = new Date();
-	var fecha = d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear();
+	var dia = d.getDate();
+	var mes = d.getMonth()+1;
+	if(dia < 10){
+		dia = "0"+dia;
+	}
+	if(mes < 10){
+		mes = "0"+mes;
+	}
+	var fecha = dia+"/"+mes+"/"+d.getFullYear();
 	return fecha;
 }
 
-$(document).ready(iniciaApp);
+var checaCubiculos = function (){
+	for(var i=7; i<18; i++){
+		for(var j=1; j<11; j++){
+			var hora ="0"+i;
+			var cubiculo ="0"+j;
+			if(j>9){
+				cubiculo =""+j;
+			}if(i>9){
+				hora=""+i;
+			}
+			$("#btn"+hora+cubiculo).click();
+		}
+	}
+}
+
+$(document).ready(function(){
+	iniciaApp();
+	checaCubiculos();
+});
