@@ -110,6 +110,86 @@
 							'estado'	=> $estado);
 		print json_encode($salidaJSON);
 	}
+	function consutaAlumno(){
+		$respuesta=false;
+		$conexion=conecta();
+		$nc =GetSQLValueString($_POST["ncontrol"],"text");
+		$nom=GetSQLValueString($_POST["nombre"],"text");
+		//Buscar si existe el ncontrol en la bd de datos
+		$buscaUsuario  = sprintf("select ncontrol from usuarios where ncontrol=%s and nombre=%s and carrera=%s",$nc,$nom,$car);
+		$resultadoBusca= mysql_query($buscaUsuario);
+		if(mysql_num_rows($resultadoBusca)>0){//Si hay 1 sí existe el usuario y podemos apartar el cubiculo
+			$apartados =sprintf("select cubiculo, fecha, hora, nombre, carrera
+								from apartados a INNER JOIN usuarios u 
+								where u.ncontrol = a.ncontrol 
+								and a.ncontrol",$nc);
+			$resultados=mysql_query($apartados);
+			$ncontrol ="";
+			$nombre   ="";
+			$carrera  ="";
+			$cubiculo ="";
+			$fecha    ="";
+			$hora     ="";
+			if(mysql_num_rows($resultado)>0){
+				$respuesta=true;
+				if($registro=mysql_fetch_array($resultado)){
+					$ncontrol   = $registro["ncontrol"];
+					$nombre     = $registro["nombre"];
+					$carrera    = $registro["carrera"];
+					$cubiculo	= $registro["cubiculo"];
+					$hora		= $registro["hora"];
+					$fecha 		= $registro["fecha"];
+				}
+			}
+			$salidaJSON = array('respuesta' => $respuesta,
+								'ncontrol' 	=> $ncontrol,
+								'nombre' 	=> $nombre,
+								'carrera'	=> $carrera,
+								'cubiculo'	=> $cubiculo,
+								'hora'		=> $hora,
+								'fechaAct'	=> $fecha);	
+			print json_encode($salidaJSON);						
+		}
+	}
+
+	function consutaCubiculo(){
+		$respuesta=false;
+		$conexion=conecta();
+		$cub =GetSQLValueString($_POST["cubiculo"],"text");
+		$buscaApartados= sprintf("select fecha, hora, a.ncontrol, nombre, carrera
+								 from apartados a INNER JOIN usuarios u 
+								 where u.ncontrol = a.ncontrol 
+								 and cubiculo=%s",$cub);
+		$resultado= mysql_query($buscaApartados);
+		if(mysql_num_rows($resultadoBusca)>0){//Si sí existe el usuario y podemos apartar el cubiculo
+			$resultados=mysql_query($apartados);
+			$ncontrol ="";
+			$nombre   ="";
+			$carrera  ="";
+			$cubiculo ="";
+			$fecha    ="";
+			$hora     ="";
+			$respuesta=true;
+			if($registro=mysql_fetch_array($resultado)){
+				$ncontrol   = $registro["ncontrol"];
+				$nombre     = $registro["nombre"];
+				$carrera    = $registro["carrera"];
+				$cubiculo	= $registro["cubiculo"];
+				$hora		= $registro["hora"];
+				$fecha 		= $registro["fecha"];
+			}
+		}
+		$salidaJSON = array('respuesta' => $respuesta,
+							'ncontrol' 	=> $ncontrol,
+							'nombre' 	=> $nombre,
+							'carrera'	=> $carrera,
+							'cubiculo'	=> $cubiculo,
+							'hora'		=> $hora,
+							'fechaAct'	=> $fecha;		
+		print json_encode($salidaJSON);					
+	}
+	
+
 	$opcion=$_POST["opcion"];
 	switch ($opcion) {
 		case 'guardar':
@@ -123,6 +203,12 @@
 			break;
 		case 'liberar':
 			liberar();
+			break;
+		case 'consultaA':
+			consutaAlumno();
+			break;
+		case 'consultaC':
+			consutaCubiculo();
 			break;
 		default:
 			# code...

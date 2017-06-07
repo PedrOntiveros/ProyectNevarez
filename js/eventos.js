@@ -1,7 +1,8 @@
 const rq   = require ('electron-require');
 const main = rq.remote('./main.js');
 const $    = require("jquery");
-
+//const ipc = require('electron').ipcRenderer;
+//ipc.send('print-to-pdf');
 var iniciaApp = function(){
 	//función para poner en el título la fecha del día de hoy.
 	var fechaTit = fechaTitulo();
@@ -13,9 +14,7 @@ var iniciaApp = function(){
 		var hora 	 = ($(this).attr("id")).substr(3,2)+":00";
 		$("#general").html("Cubiculo "+cubiculo+" hora "+hora);
 		if(hora == 'Re:00'){
-			$("#general").html("");
-			const ipc = require('electron').ipcRenderer;
-	 		ipc.send('print-to-pdf');
+			hazReporteCubiculo(cubiculo);
 		}else{
 			//Aquí hacemos la consulta para verificar que el cubiculo en la hora 
 			//seleccionada no esté ocupado.
@@ -29,7 +28,7 @@ var iniciaApp = function(){
 						    "&id="+Math.random();
 			var consultaCubiculo=$.ajax({
 				method:"POST",
-				url:"C:/xampp/htdocs/php/datos.php",
+				url:"http://localhost/php/datos.php",
 				data:parametros,
 				dataType: "json"
 				});
@@ -44,13 +43,11 @@ var iniciaApp = function(){
 					if(data.estado == "liberado"){
 						var horaBoton 	 = (hora.substr(0,2));
 						var boton="#btn"+horaBoton+cubiculo;
-						$(boton).css("background","#52CFF9");
-						$(boton).css("color","#FFFFFF");
+						$(boton).attr('class', 'btn btn-info');
 					}else if(data.estado == "apartado"){
 						var horaBoton 	 = (hora.substr(0,2));
 						var boton="#btn"+horaBoton+cubiculo;
-						$(boton).css("background","#FF0000");
-						$(boton).css("color","#FFFFFF");
+						$(boton).attr('class', 'btn btn-danger');
 					}
 				}else{
 					$("#txtFecha").val(fechaAct);
@@ -63,11 +60,59 @@ var iniciaApp = function(){
 		}
 	}
 
-	var hazReporte = function(){
-		alert("Botón Reporte por alumno");
-		const ipc = require('electron').ipcRenderer;
-	 	ipc.send('print-to-pdf');
+	var hazReporteCubiculo = function(cubiculo){
+		//Aquí debería abrir una nueva ventana con la info.
+		alert("Botón Reporte por Cubiculo: "+cubiculo);
+		var parametros ="opcion=consultaC"+
+						"&cubiculo="+cubiculo+
+						"&id="+Math.random();
+			var consultaCubiculo=$.ajax({
+				method:"POST",
+				url:"http://localhost/php/datos.php",
+				data:parametros,
+				dataType: "json"
+			});
+			consultaCubiculo.done(function(data){
+				if(data.respuesta==true){
+						//Si existen registros es que el usuario sí tiene apartados o liberados
+						//Aquí hacemos la pantalla que se va a abrir.
+						alert("Aqui sale la nueva pantalla con el botón de pdf");
+				}else{
+					alert("No hay registros para este cubiculo.")
+				}
+			});
+			consultaCubiculo.fail(function(jqError,textStatus){
+			});
 	}
+
+	var hazReporteAlumno = function(){
+		//Aquí debería abrir una nueva ventana con la info.
+		var numero =$("#txtNumeroControl").val();
+		var nombre =$("#txtNombre").val();
+		alert("Botón Reporte por alumno");
+		var parametros ="opcion=consultaA"+
+						"&ncontrol="+numero+
+						"&nombre="+nombre+
+						"&id="+Math.random();
+			var consultaCubiculo=$.ajax({
+				method:"POST",
+				url:"http://localhost/php/datos.php",
+				data:parametros,
+				dataType: "json"
+				});
+			consultaCubiculo.done(function(data){
+				if(data.respuesta==true){
+						//Si existen registros es que el usuario sí tiene apartados o liberados
+						//Aquí hacemos la pantalla que se va a abrir.
+						alert("Aqui sale la nueva pantalla con el botón de pdf");
+				}else{
+					alert("No existe usuario, o no hay registros del usuario.")
+				}
+			});
+			consultaCubiculo.fail(function(jqError,textStatus){
+			});
+	}
+
 	var liberar= function(){
 		var fecha    	  =$("#txtFecha").val();
 		var hora      	  =$("#txtHora").val();
@@ -84,7 +129,7 @@ var iniciaApp = function(){
 						   "&id="+Math.random();
 			var eliminaCubiculo=$.ajax({
 				method:"POST",
-				url:"C:/xampp/htdocs/php/datos.php",
+				url:"http://localhost/php/datos.php",
 				data:parametros,
 				dataType:"json"
 			});
@@ -93,8 +138,7 @@ var iniciaApp = function(){
 					alert("cubiculo liberado");	
 					var horaBoton 	 = (hora.substr(0,2));
 					var boton="#btn"+horaBoton+cubiculo;
-					$(boton).css("background","#52CFF9");
-					$(boton).css("color","#FFFFFF");			
+					$(boton).attr('class', 'btn btn-info');			
 				}else{
 					alert("Cubiculo no ocupado.");
 				}
@@ -129,7 +173,7 @@ var iniciaApp = function(){
 						   "&id="+Math.random();
 			var eliminaCubiculo=$.ajax({
 				method:"POST",
-				url:"C:/xampp/htdocs/php/datos.php",
+				url:"http://localhost/php/datos.php",
 				data:parametros,
 				dataType:"json"
 			});
@@ -138,15 +182,14 @@ var iniciaApp = function(){
 					alert("cubiculo eliminado");
 					var horaBoton 	 = (hora.substr(0,2));
 					var boton="#btn"+horaBoton+cubiculo;
-					$(boton).css("background","#000000");
-					$(boton).css("color","#FFFFFF");				
+					$(boton).attr('class', 'btn btn-default');			
 				}else{
 					alert("Cubiculo no existente o no se pudo eliminar");
 				}
 			});
 			eliminaCubiculo.fail(function(jqError,textStatus){
 			});
-			limpiaCampos();
+			limpiaCampos();	
 		}
 	}
 
@@ -176,7 +219,7 @@ var iniciaApp = function(){
 						   	"&id="+Math.random();
 			var altaCubiculo=$.ajax({
 				method:"POST",
-				url:"C:/xampp/htdocs/php/datos.php",
+				url:"http://localhost/php/datos.php",
 				data:parametros,
 				dataType:"json"
 			});
@@ -185,8 +228,7 @@ var iniciaApp = function(){
 					alert("Cubiculo guardado correctamente.");
 					var horaBoton 	 = (hora.substr(0,2));
 					var boton="#btn"+horaBoton+cubiculo;
-					$(boton).css("background","#FF0000");
-					$(boton).css("color","#FFFFFF");			
+					$(boton).attr('class', 'btn btn-danger');			
 				}else{
 					alert("Cubiculo ocupado o no se guardo correctamente.");
 				}
@@ -194,12 +236,13 @@ var iniciaApp = function(){
 			altaCubiculo.fail(function(jqError,textStatus){
 			});
 		}
+	
 		limpiaCampos();
 	}
 
 	//Declaración de Eventos
 	$("table button").on("click",obtenInfoCubiculo);
-	$("#btnReporte").on("click",hazReporte);
+	$("#btnReporte").on("click",hazReporteAlumno);
 	$("#btnGuardar").on("click",guardar);
 	$("#btnLiberar").on("click",liberar);
 	$("#btnEliminar").on("click",eliminar);
@@ -209,8 +252,7 @@ var limpiaCampos =function () {
 	$("#txtNumeroControl").val("");
 	$("#txtNombre").val("");
 	$("#txtCarrera").val("");
-	$("#txtFechaInicio").val("");
-	$("#txtFechaFin").val("");
+	$("#txtFecha").val("");
 	$("#txtHora").val("");
 	$("#txtCubiculo").val("");
 }

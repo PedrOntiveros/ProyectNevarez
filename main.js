@@ -18,7 +18,7 @@ const shell = electron.shell;
 ipc.on('print-to-pdf', function(event){
   	const pdfPath=path.join(os.tmpdir(), 'print.pdf');
   	const win=BrowserWindow.fromWebContents(event.sender);
-  	win.webContents.printToPDF({},function(error,data){
+  	win.webiContents.prntToPDF({},function(error,data){
    		if(error){
       		throw error;
     	}
