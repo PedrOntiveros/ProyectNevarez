@@ -35,26 +35,21 @@ body{
   #txtCarrera{
  	width: 99.6%
  }
- #txtFechaInicio{
- 	margin-right:  -5px;
+ #txtFecha{
+ 	margin-right:  -3px;
  	display: inline-block;
- 	width: 24.9%
- }
- #txtFechaFin{
- 	margin-right:  -4px;
- 	display: inline-block;
- 	width: 24.9%
+ 	width: 33.2%
  }
  
  #txtHora{
- 	margin-right:  -4px;
+ 	margin-right:  -3px;
  	display: inline-block;
- 	width: 24.9%
+ 	width: 33.2%
  }
  
  #txtCubiculo{
  	display: inline-block;
- 	width: 24.9%
+ 	width: 33%
  }
 
  #botonesEstado{
