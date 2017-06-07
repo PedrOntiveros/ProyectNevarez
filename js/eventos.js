@@ -46,8 +46,9 @@ var iniciaApp = function(){
 			});
 			consultaCubiculo.fail(function(jqError,textStatus){
 			});
-			
-			
+			$("#txtFecha").val(fechaAct);
+			$("#txtHora").val(hora);
+			$("#txtCubiculo").val(cubiculo);
 		}
 	}
 
@@ -55,29 +56,20 @@ var iniciaApp = function(){
 		//Elaborar reporte por alumno:
 	}
 	var liberar= function(){
-	 	var numeroControl =$("#txtNumeroControl").val();
-		var nombre 		  =$("#txtNombre").val(); 
-		var carrera  	  =$("#txtCarrera").val();
 		var fecha    	  =$("#txtFecha").val();
 		var hora      	  =$("#txtHora").val();
 		var cubiculo      =$("#txtCubiculo").val();
-		if(nombre== "" | carrera == "" | numeroControl == ""){
-			alert("Por favor llene todos los campos para poder liberar el cubiculo.");
-			return;
-		}
 		if(fecha == "" | hora == "" | cubiculo == ""){
 			alert("Por favor selecciona un cubiculo.");
 			return;
 		}else{
 			var parametros="opcion=liberar"+
-						   "&numeroControl="+numeroControl+
-						   "&nombre="+nombre+
-						   "&carrera="+carrera+
 						   "&fecha="+fecha+
 						   "&hora="+hora+
 						   "&cubiculo="+cubiculo+
 						   "&id="+Math.random();
 			alert("Liberar datos: "+parametros);
+
 			var eliminaCubiculo=$.ajax({
 				method:"POST",
 				url:"php/datos.php",
@@ -86,21 +78,18 @@ var iniciaApp = function(){
 			});
 			eliminaCubiculo.done(function(data){
 				if(data.respuesta==true){
-					alert("cubiculo liberado");				
+					alert("cubiculo liberado");	
+					var horaBoton 	 = (hora.substr(0,2));
+					var boton="#btn"+horaBoton+cubiculo;
+					$(boton).css("background","#52CFF9");
+					$(boton).css("color","#FFFFFF");			
 				}else{
 					alert("Cubiculo no existente o no se pudo liberar");
 				}
 			});
 			eliminaCubiculo.fail(function(jqError,textStatus){
 			});
-			$("#general").html("");
-			$("#txtNumeroControl").val("");
-			$("#txtNombre").val("");
-			$("#txtCarrera").val("");
-			$("#txtFechaInicio").val("");
-			$("#txtFechaFin").val("");
-			$("#txtHora").val("");
-			$("#txtCubiculo").val("");
+			limpiaCampos();
 		}
 	}
 
@@ -129,8 +118,7 @@ var iniciaApp = function(){
 						   "&cubiculo="+cubiculo+
 						   "&id="+Math.random();
 			alert("Eliminar datos: "+parametros);
-			$(this).css("background","#FFFFFF");
-			$(this).css("color","#000000");		   
+				   
 			var eliminaCubiculo=$.ajax({
 				method:"POST",
 				url:"php/datos.php",
@@ -140,21 +128,17 @@ var iniciaApp = function(){
 			eliminaCubiculo.done(function(data){
 				if(data.respuesta==true){
 					alert("cubiculo eliminado");
-									
+					var horaBoton 	 = (hora.substr(0,2));
+					var boton="#btn"+horaBoton+cubiculo;
+					$(boton).css("background","#000000");
+					$(boton).css("color","#FFFFFF");				
 				}else{
 					alert("Cubiculo no existente o no se pudo eliminar");
 				}
 			});
 			eliminaCubiculo.fail(function(jqError,textStatus){
 			});
-			$("#general").html("");
-			$("#txtNumeroControl").val("");
-			$("#txtNombre").val("");
-			$("#txtCarrera").val("");
-			$("#txtFechaInicio").val("");
-			$("#txtFechaFin").val("");
-			$("#txtHora").val("");
-			$("#txtCubiculo").val("");
+			limpiaCampos();
 		}
 	}
 
@@ -182,8 +166,6 @@ var iniciaApp = function(){
 						   	"&cubiculo="+cubiculo+
 						   	"&id="+Math.random();
 			alert("Guardar datos: "+parametros);
-			$(this).css("background","#FF0000");
-			$(this).css("color","#FFFFFF");	
 			var altaCubiculo=$.ajax({
 				method:"POST",
 				url:"php/datos.php",
@@ -193,8 +175,10 @@ var iniciaApp = function(){
 			altaCubiculo.done(function(data){
 				if(data.respuesta==true){
 					alert("cubiculo guardado correctamente");
-					$(this).css("background","#FF0000");
-					$(this).css("color","#FFFFFF");			
+					var horaBoton 	 = (hora.substr(0,2));
+					var boton="#btn"+horaBoton+cubiculo;
+					$(boton).css("background","#FF0000");
+					$(boton).css("color","#FFFFFF");			
 				}else{
 					alert("Cubiculo ocupado o no se guardo correctamente");
 				}
@@ -202,6 +186,7 @@ var iniciaApp = function(){
 			altaCubiculo.fail(function(jqError,textStatus){
 			});
 		}
+		limpiaCampos();
 	}
 
 	//Declaración de Eventos
@@ -210,6 +195,16 @@ var iniciaApp = function(){
 	$("#btnGuardar").on("click",guardar);
 	$("#btnLiberar").on("click",liberar);
 	$("#btnEliminar").on("click",eliminar);
+}
+var limpiaCampos =function () {
+	$("#general").html("");
+	$("#txtNumeroControl").val("");
+	$("#txtNombre").val("");
+	$("#txtCarrera").val("");
+	$("#txtFechaInicio").val("");
+	$("#txtFechaFin").val("");
+	$("#txtHora").val("");
+	$("#txtCubiculo").val("");
 }
 
 var fechaTitulo = function () {
