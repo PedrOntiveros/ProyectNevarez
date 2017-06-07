@@ -14,7 +14,8 @@ var iniciaApp = function(){
 		$("#general").html("Cubiculo "+cubiculo+" hora "+hora);
 		if(hora == 'Re:00'){
 			$("#general").html("");
-			//Aquí llamamos a la función para generar reporte
+			const ipc = require('electron').ipcRenderer;
+	 		ipc.send('print-to-pdf');
 		}else{
 			//Aquí hacemos la consulta para verificar que el cubiculo en la hora 
 			//seleccionada no esté ocupado.
@@ -28,7 +29,7 @@ var iniciaApp = function(){
 						    "&id="+Math.random();
 			var consultaCubiculo=$.ajax({
 				method:"POST",
-				url:"php/datos.php",
+				url:"C:/xampp/htdocs/php/datos.php",
 				data:parametros,
 				dataType: "json"
 				});
@@ -63,7 +64,9 @@ var iniciaApp = function(){
 	}
 
 	var hazReporte = function(){
-		//Elaborar reporte por alumno:
+		alert("Botón Reporte por alumno");
+		const ipc = require('electron').ipcRenderer;
+	 	ipc.send('print-to-pdf');
 	}
 	var liberar= function(){
 		var fecha    	  =$("#txtFecha").val();
@@ -81,7 +84,7 @@ var iniciaApp = function(){
 						   "&id="+Math.random();
 			var eliminaCubiculo=$.ajax({
 				method:"POST",
-				url:"php/datos.php",
+				url:"C:/xampp/htdocs/php/datos.php",
 				data:parametros,
 				dataType:"json"
 			});
@@ -126,7 +129,7 @@ var iniciaApp = function(){
 						   "&id="+Math.random();
 			var eliminaCubiculo=$.ajax({
 				method:"POST",
-				url:"php/datos.php",
+				url:"C:/xampp/htdocs/php/datos.php",
 				data:parametros,
 				dataType:"json"
 			});
@@ -173,7 +176,7 @@ var iniciaApp = function(){
 						   	"&id="+Math.random();
 			var altaCubiculo=$.ajax({
 				method:"POST",
-				url:"php/datos.php",
+				url:"C:/xampp/htdocs/php/datos.php",
 				data:parametros,
 				dataType:"json"
 			});
@@ -196,7 +199,7 @@ var iniciaApp = function(){
 
 	//Declaración de Eventos
 	$("table button").on("click",obtenInfoCubiculo);
-	$("#btnReporte").on("click",hazReporte)
+	$("#btnReporte").on("click",hazReporte);
 	$("#btnGuardar").on("click",guardar);
 	$("#btnLiberar").on("click",liberar);
 	$("#btnEliminar").on("click",eliminar);
