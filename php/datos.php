@@ -122,7 +122,7 @@
 			$apartados =sprintf("select a.ncontrol, cubiculo, fecha, hora, nombre, carrera
 								from apartados a INNER JOIN usuarios u 
 								where u.ncontrol = a.ncontrol 
-								and a.ncontrol",$nc);
+								and a.ncontrol=%s",$nc);
 			$resultado=mysql_query($apartados);
 			$salidaJSON = array();
 			$i=0;

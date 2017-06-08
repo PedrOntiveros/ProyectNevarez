@@ -102,6 +102,7 @@ var iniciaApp = function(){
 		//Aquí debería abrir una nueva ventana con la info.
 		var numero =$("#txtNumeroControl").val();
 		var nombre =$("#txtNombre").val();
+		alert(numero+" "+nombre)
 		var parametros ="opcion=consultaA"+
 						"&ncontrol="+numero+
 						"&nombre="+nombre+
@@ -277,8 +278,10 @@ var iniciaApp = function(){
 		$("#btnRegresa").hide();
 		const ipc = require('electron').ipcRenderer;
  		ipc.send('print-to-pdf');
- 		$("#btnPDF").show();
-		$("#btnRegresa").show();
+		setTimeout(function(){
+			$("#btnPDF").show();
+			$("#btnRegresa").show();
+		},2000);
 	});
 	$('#btnRegresa').on('click',function(){
 		$('#main').show();
