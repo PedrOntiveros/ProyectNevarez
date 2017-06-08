@@ -4,7 +4,7 @@ const electron = require('electron');
 const path = require ('path')
 //Ruta pero en formato URL
 const url = require('url')
-let PantallaPrincipal;
+
 //Constantes para impresión en PDF
 const fs = require('fs'); //sistema de archivos del SO
 const os = require('os'); //sistema operativo
@@ -17,20 +17,21 @@ const shell = electron.shell;
 //Evento para imprimir en PDF
 ipc.on('print-to-pdf', function(event){
   	const pdfPath=path.join(os.tmpdir(), 'print.pdf');
-  	const win=BrowserWindow.fromWebContents(event.sender);
-  	win.webiContents.prntToPDF({},function(error,data){
-   		if(error){
-      		throw error;
-    	}
+ 	const win=BrowserWindow.fromWebContents(event.sender);
+  	win.webContents.printToPDF({},function(error,data){
+    	if(error){
+     		throw error;
+   		}
     	fs.writeFile(pdfPath,data, function(error){
-      		if(error){
+    		if(error){
         		throw error;
-      		}
-      		shell.openExternal('file://'+pdfPath);
-    	});
-  	});
+    		}
+      	shell.openExternal('file://'+pdfPath);
+    });
+  });
 });
 
+let PantallaPrincipal;
 
 function muestraPantallaPrincipal(){
 
@@ -46,7 +47,6 @@ function muestraPantallaPrincipal(){
 		protocol: 'file',
 		slashes: true
 	}))
-	PantallaPrincipal.openDevTools()
 	PantallaPrincipal.show()
 
 }

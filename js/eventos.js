@@ -1,21 +1,21 @@
 const rq   = require ('electron-require');
 const main = rq.remote('./main.js');
 const $    = require("jquery");
-//const ipc = require('electron').ipcRenderer;
-//ipc.send('print-to-pdf');
+
 var iniciaApp = function(){
 	//función para poner en el título la fecha del día de hoy.
 	var fechaTit = fechaTitulo();
 	var fechaAct = fechaActual();
+	var semestre = getSemestre();
 	$("#titulo").html(fechaTit);
 	var obtenInfoCubiculo = function(){
 		//Esto solo debe funcionar para los botones de cubiculos
 		var cubiculo = ($(this).attr("id")).substr(-2);
 		var hora 	 = ($(this).attr("id")).substr(3,2)+":00";
-		$("#general").html("Cubiculo "+cubiculo+" hora "+hora);
 		if(hora == 'Re:00'){
 			hazReporteCubiculo(cubiculo);
 		}else{
+			$("#general").html("Cubiculo "+cubiculo+" hora "+hora);
 			//Aquí hacemos la consulta para verificar que el cubiculo en la hora 
 			//seleccionada no esté ocupado.
 			//Se hace consulta del cubiculo y se llenan los campos con la 
@@ -62,7 +62,6 @@ var iniciaApp = function(){
 
 	var hazReporteCubiculo = function(cubiculo){
 		//Aquí debería abrir una nueva ventana con la info.
-		alert("Botón Reporte por Cubiculo: "+cubiculo);
 		var parametros ="opcion=consultaC"+
 						"&cubiculo="+cubiculo+
 						"&id="+Math.random();
@@ -73,10 +72,24 @@ var iniciaApp = function(){
 				dataType: "json"
 			});
 			consultaCubiculo.done(function(data){
-				if(data.respuesta==true){
-						//Si existen registros es que el usuario sí tiene apartados o liberados
-						//Aquí hacemos la pantalla que se va a abrir.
-						alert("Aqui sale la nueva pantalla con el botón de pdf");
+				if(data[0].respuesta==true){
+					//Si existen registros es que el usuario sí tiene apartados o liberados
+					var titulo= "<h1>Reporte de cubiculo: "+cubiculo+" - Semestre: "+semestre;
+					var tabla = "<table><tr><th>No.</th><th>Fecha</th><th>Hora</th><th>N° Control</th><th>Nombre</th><th>Carrera</th></tr>";
+					var registros = data.length;
+					for(i = 0; i< registros; i++){
+						tabla = tabla+"<tr><td>"+(i+1)+"</td>";
+						tabla = tabla+"<td>"+data[i].fechaAct+"</td>";
+						tabla = tabla+"<td>"+data[i].hora+"</td>";
+						tabla = tabla+"<td>"+data[i].ncontrol+"</td>";						
+						tabla = tabla+"<td>"+data[i].nombre+"</td>";
+						tabla = tabla+"<td>"+data[i].carrera+"</td></tr>";
+					}
+					$("#main").hide();
+					$("header").hide();
+					$("#reporte").show();
+					$("#tituloReporte").html(titulo);
+					$("#reporteTabla").html(tabla);
 				}else{
 					alert("No hay registros para este cubiculo.")
 				}
@@ -89,27 +102,40 @@ var iniciaApp = function(){
 		//Aquí debería abrir una nueva ventana con la info.
 		var numero =$("#txtNumeroControl").val();
 		var nombre =$("#txtNombre").val();
-		alert("Botón Reporte por alumno");
 		var parametros ="opcion=consultaA"+
 						"&ncontrol="+numero+
 						"&nombre="+nombre+
 						"&id="+Math.random();
-			var consultaCubiculo=$.ajax({
+			var consultaAlumno=$.ajax({
 				method:"POST",
 				url:"http://localhost/php/datos.php",
 				data:parametros,
 				dataType: "json"
 				});
-			consultaCubiculo.done(function(data){
-				if(data.respuesta==true){
-						//Si existen registros es que el usuario sí tiene apartados o liberados
-						//Aquí hacemos la pantalla que se va a abrir.
-						alert("Aqui sale la nueva pantalla con el botón de pdf");
+			consultaAlumno.done(function(data){
+				if(data[0].respuesta==true){
+					//Si existen registros es que el usuario sí tiene apartados o liberados
+					var titulo= "<h1>Reporte de alumno: "+numero+" - Semestre: "+semestre;
+					var tabla = "<table><tr><th>No.</th><th>Cubiculo</th><th>Fecha</th><th>Hora</th><th>Nombre</th><th>Carrera</th></tr>";
+					var registros = data.length;
+					for(i = 0; i< registros; i++){
+						tabla = tabla+"<tr><td>"+(i+1)+"</td>";
+						tabla = tabla+"<td>"+data[i].cubiculo+"</td>";
+						tabla = tabla+"<td>"+data[i].fechaAct+"</td>";
+						tabla = tabla+"<td>"+data[i].hora+"</td>";
+						tabla = tabla+"<td>"+data[i].nombre+"</td>";
+						tabla = tabla+"<td>"+data[i].carrera+"</td></tr>";
+					}
+					$("#main").hide();
+					$("header").hide();
+					$("#reporte").show();
+					$("#tituloReporte").html(titulo);
+					$("#reporteTabla").html(tabla);
 				}else{
 					alert("No existe usuario, o no hay registros del usuario.")
 				}
 			});
-			consultaCubiculo.fail(function(jqError,textStatus){
+			consultaAlumno.fail(function(jqError,textStatus){
 			});
 	}
 
@@ -246,6 +272,20 @@ var iniciaApp = function(){
 	$("#btnGuardar").on("click",guardar);
 	$("#btnLiberar").on("click",liberar);
 	$("#btnEliminar").on("click",eliminar);
+	$("#btnPDF").on("click",function(){
+		$("#btnPDF").hide();
+		$("#btnRegresa").hide();
+		const ipc = require('electron').ipcRenderer;
+ 		ipc.send('print-to-pdf');
+ 		$("#btnPDF").show();
+		$("#btnRegresa").show();
+	});
+	$('#btnRegresa').on('click',function(){
+		$('#main').show();
+		$('header').show();
+		$('#reporte').hide();
+		$('#reporteTabla').html('');
+	});
 }
 var limpiaCampos =function () {
 	$("#general").html("");
@@ -256,7 +296,6 @@ var limpiaCampos =function () {
 	$("#txtHora").val("");
 	$("#txtCubiculo").val("");
 }
-
 var fechaTitulo = function () {
 	var d = new Date();
 	var dias = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
@@ -265,7 +304,6 @@ var fechaTitulo = function () {
 	var fecha = dias[d.getDay()]+" "+d.getDate()+" de "+mes[d.getMonth()]+" de "+d.getFullYear();
 	return fecha;
 }
-
 var fechaActual = function () {
 	var d = new Date();
 	var dia = d.getDate();
@@ -279,7 +317,6 @@ var fechaActual = function () {
 	var fecha = dia+"/"+mes+"/"+d.getFullYear();
 	return fecha;
 }
-
 var checaCubiculos = function (){
 	for(var i=7; i<18; i++){
 		for(var j=1; j<11; j++){
@@ -293,6 +330,19 @@ var checaCubiculos = function (){
 			$("#btn"+hora+cubiculo).click();
 		}
 	}
+	$("#btn0701").click();
+}
+var getSemestre = function(){
+	var d = new Date();
+	var mes = d.getMonth();
+	var año = ""+d.getFullYear();
+	var semestre = "";
+	if(mes<7){
+		semestre = "ENE-JUN"+año.substring(2);
+	}else{
+		semestre = "AGO-DIC"+año.substring(2);
+	}
+	return semestre;
 }
 
 $(document).ready(function(){

@@ -116,80 +116,65 @@
 		$nc =GetSQLValueString($_POST["ncontrol"],"text");
 		$nom=GetSQLValueString($_POST["nombre"],"text");
 		//Buscar si existe el ncontrol en la bd de datos
-		$buscaUsuario  = sprintf("select ncontrol from usuarios where ncontrol=%s and nombre=%s and carrera=%s",$nc,$nom,$car);
+		$buscaUsuario  = sprintf("select ncontrol from usuarios where ncontrol=%s and nombre=%s",$nc,$nom);
 		$resultadoBusca= mysql_query($buscaUsuario);
 		if(mysql_num_rows($resultadoBusca)>0){//Si hay 1 sí existe el usuario y podemos apartar el cubiculo
-			$apartados =sprintf("select cubiculo, fecha, hora, nombre, carrera
+			$apartados =sprintf("select a.ncontrol, cubiculo, fecha, hora, nombre, carrera
 								from apartados a INNER JOIN usuarios u 
 								where u.ncontrol = a.ncontrol 
 								and a.ncontrol",$nc);
-			$resultados=mysql_query($apartados);
-			$ncontrol ="";
-			$nombre   ="";
-			$carrera  ="";
-			$cubiculo ="";
-			$fecha    ="";
-			$hora     ="";
+			$resultado=mysql_query($apartados);
+			$salidaJSON = array();
+			$i=0;
 			if(mysql_num_rows($resultado)>0){
 				$respuesta=true;
-				if($registro=mysql_fetch_array($resultado)){
-					$ncontrol   = $registro["ncontrol"];
-					$nombre     = $registro["nombre"];
-					$carrera    = $registro["carrera"];
-					$cubiculo	= $registro["cubiculo"];
-					$hora		= $registro["hora"];
-					$fecha 		= $registro["fecha"];
+				while($registro=mysql_fetch_array($resultado)){
+					$salidaJSON[$i]=array('respuesta' => $respuesta,
+									'ncontrol' 	=> $registro["ncontrol"],
+									'nombre' 	=> $registro["nombre"],
+									'carrera'	=> $registro["carrera"],
+									'cubiculo'	=> $registro["cubiculo"],
+									'hora'		=> $registro["hora"],
+									'fechaAct'	=> $registro["fecha"]);
+					$i++; 
 				}
-			}
-			$salidaJSON = array('respuesta' => $respuesta,
-								'ncontrol' 	=> $ncontrol,
-								'nombre' 	=> $nombre,
-								'carrera'	=> $carrera,
-								'cubiculo'	=> $cubiculo,
-								'hora'		=> $hora,
-								'fechaAct'	=> $fecha);	
-			print json_encode($salidaJSON);						
+				print json_encode($salidaJSON);	
+			}else{
+				$salidaJSON[$i] = array('respuesta' => $respuesta);
+				print json_encode($salidaJSON);	
+			}				
 		}
 	}
-
 	function consutaCubiculo(){
 		$respuesta=false;
 		$conexion=conecta();
 		$cub =GetSQLValueString($_POST["cubiculo"],"text");
-		$buscaApartados= sprintf("select fecha, hora, a.ncontrol, nombre, carrera
+		$buscaApartados= sprintf("select fecha, hora, a.ncontrol, nombre, carrera, cubiculo
 								 from apartados a INNER JOIN usuarios u 
 								 where u.ncontrol = a.ncontrol 
 								 and cubiculo=%s",$cub);
 		$resultado= mysql_query($buscaApartados);
-		if(mysql_num_rows($resultadoBusca)>0){//Si sí existe el usuario y podemos apartar el cubiculo
-			$resultados=mysql_query($apartados);
-			$ncontrol ="";
-			$nombre   ="";
-			$carrera  ="";
-			$cubiculo ="";
-			$fecha    ="";
-			$hora     ="";
+		$salidaJSON = array();			
+		$i=0;
+		if(mysql_num_rows($resultado)>0){//Sí encontró apartados para ese cubiculo.
 			$respuesta=true;
-			if($registro=mysql_fetch_array($resultado)){
-				$ncontrol   = $registro["ncontrol"];
-				$nombre     = $registro["nombre"];
-				$carrera    = $registro["carrera"];
-				$cubiculo	= $registro["cubiculo"];
-				$hora		= $registro["hora"];
-				$fecha 		= $registro["fecha"];
+			while($registro=mysql_fetch_array($resultado)){
+				$salidaJSON[$i]=array('respuesta'	=> $respuesta,
+									  'ncontrol' 	=> $registro["ncontrol"],
+									  'nombre' 		=> $registro["nombre"],
+									  'carrera'		=> $registro["carrera"],
+									  'cubiculo'	=> $registro["cubiculo"],
+									  'hora'		=> $registro["hora"],
+									  'fechaAct'	=> $registro["fecha"]);
+				$i++; 
 			}
-		}
-		$salidaJSON = array('respuesta' => $respuesta,
-							'ncontrol' 	=> $ncontrol,
-							'nombre' 	=> $nombre,
-							'carrera'	=> $carrera,
-							'cubiculo'	=> $cubiculo,
-							'hora'		=> $hora,
-							'fechaAct'	=> $fecha;		
-		print json_encode($salidaJSON);					
+			print json_encode($salidaJSON);	
+		}else{
+			$salidaJSON[$i]= array('respuesta'	=> $respuesta);
+			print json_encode($salidaJSON);	
+		}		
 	}
 	
-
 	$opcion=$_POST["opcion"];
 	switch ($opcion) {
 		case 'guardar':
@@ -214,4 +199,3 @@
 			# code...
 			break;
 	}
-?>

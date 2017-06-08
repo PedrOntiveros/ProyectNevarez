@@ -10,6 +10,8 @@
 	  src="https://code.jquery.com/jquery-3.2.1.min.js"
 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	  crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
   	<script src="js/eventos.js"></script>
 </head>
 <body>
@@ -17,316 +19,316 @@
 		<h1 id="titulo"></h1>
 	</header>
 	<main>
-		<table id = "tabla" style="width:80%">
-	 		 <tr>
-	    		<th class="num" class="tamaño">Hora <br> Cubículo</th>
-	   			<th class="tamaño" >07:00</th> 
-	    		<th class="tamaño" >08:00</th>
-	    		<th class="tamaño" >09:00</th> 
-	    		<th class="tamaño" >10:00</th>
-	    		<th class="tamaño" >11:00</th> 
-	    		<th class="tamaño" >12:00</th>
-	    		<th class="tamaño" >13:00</th> 
-	    		<th class="tamaño" >14:00</th>
-	    		<th class="tamaño" >15:00</th> 
-	    		<th class="tamaño" >16:00</th>
-	    		<th class="tamaño" >17:00</th> 
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">01 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0701">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0801">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0901">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1001">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1101">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1201">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1301">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1401">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1501">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1601">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1701">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte01">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">02 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0702">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0802">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0902">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1002">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1102">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1202">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1302">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1402">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1502">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1602">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1702">-
-					</button></td>
-		    	<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte02">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">03 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0703">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0803">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0903">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1003">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1103">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1203">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1303">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1403">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1503">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1603">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1703">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte03">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">04 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0704">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0804">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0904">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1004">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1104">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1204">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1304">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1404">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1504">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1604">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1704">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte04">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">05 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0705">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0805">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0905">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1005">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1105">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1205">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1305">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1405">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1505">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1605">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1705">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte05">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">06 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0706">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0806">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0906">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1006">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1106">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1206">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1306">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1406">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1506">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1606">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1706">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte06">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">07 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0707">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0807">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0907">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1007">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1107">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1207">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1307">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1407">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1507">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1607">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1707">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte07">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">08 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0708">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0808">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0908">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1008">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1108">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1208">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1308">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1408">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1508">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1608">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1708">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte08">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">09 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0709">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0809">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0909">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1009">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1109">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1209">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1309">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1409">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1509">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1609">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1709">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte09">...
-					</button></td>
-	  		</tr>
-	  		<tr>
-	  			<th class= "num" class="tamaño">10 </th>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0710">
-				-</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0810">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0910">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1010">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1110">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1210">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1310">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1410">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1510">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1610">-
-					</button></td>
-	    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1710">-
-					</button></td>
-				<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte10">...
-					</button></td>
-	  		</tr>
-		</table>
-		<article id= "datos">
-		<br>
-		<article id="general"></article>
-			
-			<input type="text" id="txtNumeroControl" placeholder="Número de control" class="form-control">
-			<input type="text" id="txtNombre" placeholder="Nombre" class="form-control">
-			<button class="btn btn-info" id="btnReporte">?
-				</button>
-			<input type="text" id="txtCarrera" placeholder="Carrera" class="form-control">
-			<input type="text" id="txtFecha" placeholder="Fecha" class="form-control">
-			<input type="text" id="txtHora" placeholder="Hora" class="form-control">
-			<input type="text" id="txtCubiculo" placeholder="Cubiculo" class="form-control">
-		</article>
+		<section id="reporte">
+			<h1 id="tituloReporte"></h1>
+			<button id='btnRegresa' class='btn btn-danger'>Regresa</button>
+			<button id='btnPDF' class='btn btn-info'>PDF</button>
+			<article id="reporteTabla">
+			</article>
+		</section>
+		<section id="main">
+			<table id = "tabla" style="width:80%">
+	 		 	<tr>
+	    			<th class="num" class="tamaño">Hora <br> Cubículo</th>
+		   			<th class="tamaño" >07:00</th> 
+		    		<th class="tamaño" >08:00</th>
+		    		<th class="tamaño" >09:00</th> 
+		    		<th class="tamaño" >10:00</th>
+		    		<th class="tamaño" >11:00</th> 
+		    		<th class="tamaño" >12:00</th>
+		    		<th class="tamaño" >13:00</th> 
+		    		<th class="tamaño" >14:00</th>
+		    		<th class="tamaño" >15:00</th> 
+		    		<th class="tamaño" >16:00</th>
+		    		<th class="tamaño" >17:00</th> 
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">01 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0701">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0801">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0901">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1001">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1101">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1201">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1301">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1401">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1501">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1601">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1701">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte01">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">02 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0702">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0802">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0902">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1002">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1102">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1202">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1302">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1402">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1502">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1602">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1702">-
+						</button></td>
+			    	<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte02">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">03 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0703">-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0803">-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0903">-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1003">-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1103">-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1203">-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1303">-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1403">-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1503">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1603">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1703">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte03">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">04 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0704">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0804">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0904">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1004">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1104">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1204">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1304">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1404">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1504">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1604">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1704">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte04">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">05 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0705">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0805">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0905">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1005">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1105">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1205">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1305">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1405">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1505">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1605">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1705">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte05">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">06 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0706">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0806">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0906">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1006">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1106">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1206">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1306">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1406">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1506">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1606">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1706">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte06">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">07 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0707">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0807">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0907">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1007">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1107">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1207">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1307">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1407">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1507">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1607">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1707">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte07">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">08 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0708">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0808">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0908">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1008">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1108">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1208">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1308">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1408">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1508">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1608">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1708">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte08">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">09 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0709">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0809">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0909">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1009">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1109">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1209">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1309">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1409">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1509">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1609">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1709">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte09">...
+						</button></td>
+		  		</tr>
+		  		<tr>
+		  			<th class= "num" class="tamaño">10 </th>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0710">
+					-</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0810">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn0910">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1010">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1110">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1210">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1310">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1410">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1510">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1610">-
+						</button></td>
+		    		<td><button class="btn btn-default" class="botonesCubiculo" id="btn1710">-
+						</button></td>
+					<td><button class="btn btn-default" class="botonesCubiculo" id="btnReporte10">...
+						</button></td>
+		  		</tr>
+			</table>
+			<article id= "datos">
+			<br>
+			<article id="general"></article>
+				
+				<input type="text" id="txtNumeroControl" placeholder="Número de control" class="form-control">
+				<input type="text" id="txtNombre" placeholder="Nombre" class="form-control">
+				<button class="btn btn-info" id="btnReporte">?
+					</button>
+				<input type="text" id="txtCarrera" placeholder="Carrera" class="form-control">
+				<input type="text" id="txtFecha" placeholder="Fecha" class="form-control">
+				<input type="text" id="txtHora" placeholder="Hora" class="form-control">
+				<input type="text" id="txtCubiculo" placeholder="Cubiculo" class="form-control">
+			</article>
 
-		<article id= "botonesEstado">	
-		<br>
-			<button class="btn btn-success" id="btnGuardar">GUARDAR
-			</button>
-			<button class="btn btn-warning" id="btnLiberar">LIBERAR
-			</button>
-			<button class="btn btn-danger" id="btnEliminar">ELIMINAR
-			</button>
-		</article>
-		
+			<article id= "botonesEstado">	
+			<br>
+				<button class="btn btn-success" id="btnGuardar">GUARDAR
+				</button>
+				<button class="btn btn-warning" id="btnLiberar">LIBERAR
+				</button>
+				<button class="btn btn-danger" id="btnEliminar">ELIMINAR
+				</button>
+			</article>
+		</section>
 	</main>
 </body>
 </html>

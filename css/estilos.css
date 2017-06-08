@@ -86,3 +86,19 @@ body{
 #tabla button {
 	width: 60px;
 }
+#reporte{
+	display: none;
+	margin: 0 auto;
+	text-align: center;
+}
+#reporte table{
+	margin: 0 auto;
+	width: 100%;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+}
+#reporte table th{
+	text-align: center;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+}
